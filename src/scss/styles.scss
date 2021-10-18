@@ -1,0 +1,256 @@
+@import "variables";
+@import "mixins";
+
+header {
+    width: 100%;
+    background-color: rgb(22, 22, 22);
+    box-shadow: 0 0 10px darken($headergrey, 6);
+    height: 80px;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: 1fr 1fr;
+    margin: 0 auto;
+    align-items: right;
+
+    position: fixed;
+    z-index: 2;
+    opacity: 0.9;
+    @include mQ(800px) {
+        align-items: center;
+        height: 80px;
+    }
+
+    .nav-options {
+        display: flex;
+        width: 100%;
+        height: fit-content;
+        position: absolute;
+        top: 9vh;
+        left: -100%;
+        opacity: 0;
+        // transition: all 0.5s ease;
+        flex-direction: column;
+        list-style-type: none;
+        grid-gap: 0px;
+        // color: white;
+        @include mQ(800px) {
+            justify-content: flex-end;
+            opacity: 1;
+            position: relative;
+            top: 0;
+            left: 0;
+            // margin-right: 40px;
+            flex-direction: row;
+        }
+    }
+    .nav-options.active {
+        background: $lightgrey;
+        box-shadow: 0 2px 5px darken($headergrey, 20);
+        position: absolute;
+        left: 0;
+        top: 80px;
+        opacity: 0.95;
+        // transition: all 0.3s ease;
+        z-index: 1;
+        align-content: center;
+        padding-left: 0px;
+        justify-content: start;
+        @include mQ(800px) {
+            justify-content: flex-end;
+            opacity: 1;
+            position: relative;
+            top: 0;
+            left: 0;
+            flex-direction: row;
+            background: none;
+            box-shadow: none;
+        }
+    }
+    a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 5vw;
+        padding: 30px 0px;
+        color: lighten($headergrey, 20);
+        font-size: 1.2rem;
+        text-decoration: none;
+        &:active {
+            text-decoration: underline;
+        }
+        @include mQ(800px) {
+            padding: 20px 40px;
+            color: $lightgrey;
+            height: fit-content;
+        }
+        &:hover {
+            background: lighten($headergrey, 20);
+            color: $lightgrey;
+            text-shadow: 1px 1px 2px $headergrey;
+            @include mQ(800px) {
+                background: none;
+                color: darken($lightgrey, 15);
+            }
+        }
+    }
+    h1 {
+        color: $lightgrey;
+        text-align: left;
+        margin-left: 40px;
+        padding: 0;
+    }
+    .mobile-menu {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        @include mQ(800px) {
+            display: none;
+        }
+    }
+    .menu-icon {
+        width: 40px;
+        height: 40px;
+        padding-right: 40px;
+        color: $lightgrey;
+    }
+    .Icon {
+        padding-left: 15px;
+        color: $iconColor;
+    }
+}
+
+main {
+    padding-top: 80px;
+}
+.Container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 30px;
+    padding: 30px;
+    min-height: 65vh;
+
+    @include mQ(800px) {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 40px;
+        gap: 40px;
+    }
+    @include mQ(1400px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    div {
+        height: 30vh;
+        width: 100%;
+        object-fit: cover;
+        object-position: center;
+        overflow: hidden;
+        box-shadow: 0 10px 10px darken($lightgrey, 6);
+        z-index: 0;
+        &:hover {
+            opacity: 0.7;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+        }
+        @include mQ(600px) {
+            height: 40vh;
+        }
+        @include mQ(800px) {
+            height: 40vh;
+        }
+        @include mQ(1024px) {
+            height: 40vh;
+        }
+        @include mQ(1400px) {
+            height: 40vh;
+        }
+        img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            object-position: center;
+            overflow: hidden;
+        }
+    }
+}
+.NotDisplayed {
+    display: none;
+}
+.Displayed {
+    position: relative;
+    bottom: 50px;
+    left: 40%;
+    font-size: 2rem;
+    color: $iconColor;
+    text-shadow: 0 0 10px grey;
+}
+
+.lds-ellipsis {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+    div {
+        position: absolute;
+        top: 10px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: lighten($headergrey, 10);
+        animation-timing-function: cubic-bezier(0, 1, 1, 0);
+        &:nth-child(1) {
+            left: 8px;
+            animation: lds-ellipsis1 0.6s infinite;
+        }
+        &:nth-child(2) {
+            left: 8px;
+            animation: lds-ellipsis2 0.6s infinite;
+        }
+        &:nth-child(3) {
+            left: 32px;
+            animation: lds-ellipsis2 0.6s infinite;
+        }
+        &:nth-child(4) {
+            left: 56px;
+            animation: lds-ellipsis3 0.6s infinite;
+        }
+        @include mQ(800px) {
+            width: 13px;
+            height: 13px;
+        }
+    }
+}
+
+@keyframes lds-ellipsis1 {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+@keyframes lds-ellipsis3 {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(0);
+    }
+}
+@keyframes lds-ellipsis2 {
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(24px, 0);
+    }
+}
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 9vh;
+    width: 100%;
+    background: lighten($headergrey, 12);
+    color: $lightgrey;
+}
